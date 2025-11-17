@@ -1,0 +1,4 @@
+let { BASE_URL, URL_BUILDER, DISALLOWED } = process.env;
+DISALLOWED = JSON.parse(DISALLOWED);
+
+module.exports = { BASE_URL, URL_BUILDER, DISALLOWED };
