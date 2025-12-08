@@ -78,24 +78,51 @@ class FortNightreport {
     const regex = /([A-Za-z]+)\s*(\d{1,2})-(\d{1,2}),\s*(\d{4})/g;
     const results = [];
     let match;
-
+    
     const fmt = (d) => d.toISOString().slice(0, 10);
-
+    
     while ((match = regex.exec(text)) !== null) {
       const [, month, startDay, endDay, year] = match;
-
+      
       const start = new Date(`${month} ${startDay}, ${year}`);
       const end = new Date(`${month} ${endDay}, ${year}`);
-
+      
       results.push({
         start: fmt(start),
         end: fmt(end),
       });
     }
-
+    
     return results.length > 0 ? results : null;
   }
 
+  // -------------------------
+  //   SORT ARRAY
+  // -------------------------
+
+  sortArray(result){
+    const sortedArray = Object.entries(result)
+        .sort((a, b) => {
+          const endA = Object.values(a[1])[1];
+          const endB = Object.values(b[1])[1];
+
+          // sort by end desc
+          if (endA !== endB) 
+            return endB - endA; 
+
+          const startA = Object.values(a[1])[0];
+          const startB = Object.values(b[1])[0];
+
+          // tie → start desc
+          return startB - startA; 
+        })
+        .reduce((obj, [key, val]) => {
+          obj[key] = val;
+          return obj;
+        }, {});
+      
+        return sortedArray;
+  }
   // -------------------------
   //   EXTRACT (MODULARIZED)
   // -------------------------
@@ -138,7 +165,7 @@ class FortNightreport {
         return {};
       }
 
-      const [{ end : start},{ end }] = range;
+      const [{ end: start }, { end }] = range;
       const result = {};
 
       rows.forEach((row) => {
@@ -164,7 +191,10 @@ class FortNightreport {
         };
       });
 
-      return result;
+      const sorted = this.sortArray(result);
+
+      return sorted;
+
     } catch (err) {
       return { error: err.message };
     }
