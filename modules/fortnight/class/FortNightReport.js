@@ -132,6 +132,7 @@ class FortNightreport {
   // -------------------------
   async run() {
     try {
+      await this.init();
       // fetchPage handles 4xx fallback
       const html = await this.fetchPage();
       const $ = cheerio.load(html);
