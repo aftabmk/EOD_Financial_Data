@@ -1,6 +1,6 @@
-const { DISALLOWED } = require('../constant');
+const { DISALLOWED } = require('./constant');
 const { BhavcopyFetcher } = require("./BhavcopyFetcher");
-const { getLastTradingDays } = require('../utils/prevDays');
+const { getLastTradingDays } = require('./utils/prevDays');
 
 class BhavcopyAnalyzer {
   constructor() {

@@ -1,5 +1,5 @@
 const cheerio = require("cheerio");
-const { PAGE_URL, DATE_URL, DATE_SELECTOR } = require("../constant");
+const { PAGE_URL, DATE_URL, DATE_SELECTOR } = require("./constant");
 const getFortnightDates  = require("./fortnightDate"); // adjust path
 
 class FortNightreport {

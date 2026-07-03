@@ -1,4 +1,4 @@
-const { BhavcopyAnalyzer } = require('../class');
+const { BhavcopyAnalyzer } = require('../core/bhavcopy/BhavcopyAnalyzer');
 
 const main = async () => {
     try {

@@ -1,4 +1,4 @@
-const { BASE_URL, URL_BUILDER } = require('../constant');
+const { BASE_URL, URL_BUILDER } = require('./constant');
 
 class BhavcopyFetcher {
   constructor() {

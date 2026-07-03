@@ -1,4 +1,4 @@
-const { FortNightreport } = require('../class');
+const { FortNightreport } = require('../core/fortnight/FortNightReport');
 
 const main = async () => {
     try {
