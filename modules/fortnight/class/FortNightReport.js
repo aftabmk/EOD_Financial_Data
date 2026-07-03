@@ -1,11 +1,15 @@
 const cheerio = require("cheerio");
-const { PAGE_URL } = require("../constant");
-const { getFortnightDates } = require("../utils/fortnightDate"); // adjust path
+const { PAGE_URL, DATE_URL, DATE_SELECTOR } = require("../constant");
+const getFortnightDates  = require("./fortnightDate"); // adjust path
 
 class FortNightreport {
   constructor() {
     if (!PAGE_URL) throw new Error("PAGE_URL is required");
-    const { current, previous } = getFortnightDates();
+  }
+  
+  async init() {
+    const parser = new getFortnightDates(DATE_URL, `#${DATE_SELECTOR}`);
+    const [ current, previous ] = await parser.getDates(2);
     this.currentUrl = PAGE_URL.replace("[date]", current);
     this.previousUrl = PAGE_URL.replace("[date]", previous);
   }
