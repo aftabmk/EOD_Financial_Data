@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 const path = require('path');
 const runWorker = require('./worker/worker');
 
@@ -17,5 +15,8 @@ async function main() {
     }
 }
 
-if(require.main === module) main();
+if(require.main === module) {
+    require('dotenv').config();
+    main();
+}
 module.exports.handler = main;
