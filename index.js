@@ -1,17 +1,18 @@
-const { BhavcopyAnalyzer, FortNightreport } = require('./class');
+const path = require('path');
+const runWorker = require('./worker/worker');
 
+async function main() {
+    try {
+        const [bhavcopy, fortnight] = await Promise.all([
+            runWorker(path.join(__dirname,'.','worker','fortnight')),
+            runWorker(path.join(__dirname, '.','worker','bhavcopy' )),
+        ]);
 
-const main = async() => {
-    // ---- USAGE ----
-    const bhavcopyReport = new BhavcopyAnalyzer();
-    const fortNightReport = new FortNightreport();
-      
-    const data = await Promise.all([
-        bhavcopyReport.run(),
-        fortNightReport.run()
-    ]);
-
-    console.dir(data,{depth : 3});
+        console.dir({bhavcopy,fortnight},{ depth: 3 });
+    }
+    catch (err) {
+        console.error(err);
+    }
 }
 
 main();
